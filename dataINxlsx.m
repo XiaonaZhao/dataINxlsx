@@ -24,10 +24,18 @@ Yfit = dataFit(Y);
 %     Y(:, n) = dataFit(sheet(:, n+1));
 % end
 
+
 %%
 scatter(X, Y);
 hold on
 plot(X, Yfit);
+
+for n = 1:9
+    plot(X, Y(:, n));
+    hold on
+end
+
+
 
 % h=plot(a,b,'k-o','Markersize',7,'Markerface','white','linewidth',1.0);
 % XLabel('a','fontsize',10)
