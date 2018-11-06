@@ -24,27 +24,37 @@ Yfit = dataFit(Y);
 %     Y(:, n) = dataFit(sheet(:, n+1));
 % end
 
-
 %%
 scatter(X, Y);
 hold on
 plot(X, Yfit);
 
-for n = 1:9
-    plot(X, Y(:, n));
+%%
+n = 4;
+sheet = selectXlsxFile(n);
+X = sheet(:, 1);
+Y = sheet(:, (2:end));
+
+col = size(Y, 2); % 2 returns the num of col
+for n = 1:col
+    Yfit(:, n) = dataFit(Y(:, n));
+end
+
+for n = 1:col
+%     plot(X, Y(:, n)); % get raw lines
+    plot(X, Yfit(:, n)); % get fitted lines
     hold on
 end
 
 
-
 % h=plot(a,b,'k-o','Markersize',7,'Markerface','white','linewidth',1.0);
-% XLabel('a','fontsize',10)
-% YLabel('b','fontsize',10)
+xlabel('Frames','fontsize',10)
+ylabel('ΔIntensity','fontsize',10)
 % Legend('a','b',0)
 % hh = findobj('tag','legend');   %|
 % set(hh,'fontsize',10)         %| 设置legend字号大小
-% set(h,'LineWidth',1.0);       %| 设置图形线宽
-% set(gca,'linewidth',1.5)      %| 设置图形外边框的线宽1.5
+set(findobj(get(gca, 'Children'), 'LineWidth',0.5), 'LineWidth', 2);        %| 设置图形线宽
+set(gca, 'linewidth', 1.5)      %| 设置图形外边框的线宽1.5
 % set(gca,'box','off')          %| 去图形外筐
 % %| 设置坐标轴字号12 ，斜体，正
 % set(gca,'fontsize',12,'fontweight','normal','fontangle','italic')
